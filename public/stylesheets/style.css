@@ -31,6 +31,30 @@ h3 {
   margin-top: 5px;
 }
 
+.health {
+  font-family: 'Squada One', cursive;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.movies {
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.music {
+  font-family: 'Righteous', cursive;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.tech {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  font-size: 50px;
+}
+
 .article {
   border: solid;
   padding: 10px;
