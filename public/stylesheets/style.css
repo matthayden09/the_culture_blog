@@ -17,7 +17,17 @@ body {
 
 }
 
+h2 {
+  text-align: center;
+}
+
 .content {
   border: solid;
   padding: 10px;
+  margin: 10px;
+}
+
+.row {
+  padding: 10px;
+  margin: 10px;
 }
