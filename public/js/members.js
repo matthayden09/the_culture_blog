@@ -9,6 +9,8 @@ $(document).ready(() => {
   var blogContainer = $(".blog-container");
   var post;
 
+
+  //retrieve post by catagory from models 
   function getPost(category){ 
     var string = category || "";
     if(string){
@@ -27,6 +29,7 @@ $(document).ready(() => {
 
   getPost()
 
+  // grab post array and render a new post card 
   function initialize(){
     blogContainer.empty();
     var postAdd = [];
@@ -36,6 +39,7 @@ $(document).ready(() => {
     blogContainer.append(postAdd);
   }
 
+  // render post card 
   function createPost(post){
     const postCard = $("<div>");
     postCard.addClass("card");
@@ -77,6 +81,7 @@ $(document).ready(() => {
   }
 
 
+  // function for no post 
   function displayEmpty() {
     blogContainer.empty();
     var messageH2 = $("<h2>");
@@ -90,6 +95,8 @@ $(document).ready(() => {
   
   postCategorySelect.val("Personal");
 
+
+  //user submit new post 
   $(cmsForm).on("submit", function handleFormSubmit(event) {
     event.preventDefault();
   
@@ -108,6 +115,7 @@ $(document).ready(() => {
 
   });
 
+  //once submited refresh the page 
   function submitPost(Post) {
     $.post("/api/posts/", Post, function() {
       window.location.href = "/members";
