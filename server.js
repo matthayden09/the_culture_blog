@@ -43,6 +43,7 @@ io.on("connection", socket => {
   socket.emit("chat-message", "Hello World");
 
   socket.on("send-chat-message", message => {
+    //sending message that's connected to all the users except the original user.
     socket.broadcast.emit("chat-message", {
       message: message,
       name: users[socket.id]
