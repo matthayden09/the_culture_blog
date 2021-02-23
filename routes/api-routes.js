@@ -2,7 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -51,34 +51,51 @@ module.exports = function(app) {
     }
   });
 
-  app.get("/api/posts/", function(req, res) {
+  app.get("/api/posts/", function (req, res) {
     db.Post.findAll({})
-      .then(function(dbPost) {
+      .then(function (dbPost) {
         res.json(dbPost);
       });
   });
 
-  app.get("/api/posts/category/:category", function(req, res) {
+  app.get("/api/posts/category/:category", function (req, res) {
     db.Post.findAll({
       where: {
         category: req.params.category
       }
     })
-      .then(function(dbPost) {
+      .then(function (dbPost) {
         res.json(dbPost);
       });
   });
 
-  app.post("/api/posts", function(req, res) {
+  app.post("/api/posts", function (req, res) {
     console.log(req.body);
     db.Post.create({
       title: req.body.title,
       body: req.body.body,
       category: req.body.category
     })
-      .then(function(dbPost) {
+      .then(function (dbPost) {
         res.json(dbPost);
       });
   });
+  
+  app.delete("/api/posts/:id", (req, res) => {
+    db.Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(function (dbPost) {
+        res.json(dbPost)
+      })
+  })
+
+
 
 };
+
+
+
+

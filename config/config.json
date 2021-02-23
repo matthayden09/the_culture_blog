@@ -1,11 +1,7 @@
 {
   "development": {
-    "username": "root",
-
+    "username": "root", 
     "password": "coldweather2020",
-    "database": "passport_demo",
-
-    "password": "password",
     "database": "blog_db",
 
     "host": "127.0.0.1",

@@ -9,6 +9,8 @@ $(document).ready(() => {
   var blogContainer = $(".blog-container");
   var post;
 
+  $(document).on("click", "button.delete", postDelete)
+
 
   //retrieve post by catagory from models 
   function getPost(category){ 
@@ -28,6 +30,17 @@ $(document).ready(() => {
   }
 
   getPost()
+
+
+  function deletePost(id){
+    $.ajax({
+      method: "DELETE",
+      url: "/api/posts/" + id
+    })
+    .then(function(){
+      getPost()
+    })
+  }
 
   // grab post array and render a new post card 
   function initialize(){
@@ -81,6 +94,8 @@ $(document).ready(() => {
   }
 
 
+
+
   // function for no post 
   function displayEmpty() {
     blogContainer.empty();
@@ -121,6 +136,14 @@ $(document).ready(() => {
       window.location.href = "/members";
     });
   }
+
+    function postDelete(){
+      var currentPost = $(this)
+      .parent()
+      .parent()
+      .data("post");
+      deletePost(currentPost.id)
+    }
 
 
   $.get("/api/user_data").then(data => {
