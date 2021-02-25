@@ -40,7 +40,12 @@ io.on("connection", socket => {
     socket.broadcast.emit("user-connected", name)
   })
 
-  socket.emit("chat-message", "Hello World");
+  socket.on("disconnect", () => {
+    socket.broadcast.emit("user-disconnect", users[socket.id])
+    delete users[socket.id]
+  })
+
+
 
   socket.on("send-chat-message", message => {
     socket.broadcast.emit("chat-message", {

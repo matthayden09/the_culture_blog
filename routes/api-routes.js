@@ -44,15 +44,25 @@ module.exports = function (app) {
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
+      db.User.findAll({
+        include: [db.Post]
+      }).then(
       res.json({
         email: req.user.email,
         id: req.user.id
-      });
+      }));
     }
   });
 
   app.get("/api/posts/", function (req, res) {
-    db.Post.findAll({})
+    var query = {};
+    if (req.query.user_id) {
+      query.UserId = req.query.user_id;
+    }
+    db.Post.findAll({
+      where: query,
+      include: [db.User]
+    })
       .then(function (dbPost) {
         res.json(dbPost);
       });

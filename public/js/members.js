@@ -7,7 +7,14 @@ $(document).ready(() => {
   var cmsForm = $("#cms");
   var postCategorySelect = $("#list-category");
   var blogContainer = $(".blog-container");
+  var author;
   var post;
+
+$.get("/api/user_data", data => {
+  console.log(data.email)
+  author = data.email
+})
+
 
   $(document).on("click", "button.delete", postDelete)
 
@@ -56,6 +63,7 @@ $(document).ready(() => {
   function createPost(post){
     const postCard = $("<div>");
     postCard.addClass("card");
+    postCard.attr("author", author)
     const postCardHeading = $("<div>");
     postCardHeading.addClass("card-header");
     const deleteBtn = $("<button>");
@@ -160,16 +168,18 @@ $(document).ready(() => {
 
     socket.emit("new-user", name);
 
-    socket.on("user-connected", name => {
-      appendMessage(`${name} connected`)
-    })
+  
 
-    socket.on("user-disconnected", name => {
+    socket.on("user-disconnect", name => {
       appendMessage(`${name} disconnected`)
     })
 
     socket.on("chat-message", data => {
       appendMessage(`${data.name}: ${data.message}`)
+    })  
+    
+    socket.on("user-connected", name => {
+      appendMessage(`${name} connected`)
     })
 
     messageForm.addEventListener("submit", e => {
