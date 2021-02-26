@@ -96,6 +96,7 @@ module.exports = function (app) {
     db.Post.destroy({
       where: {
         id: req.params.id
+        
       }
     })
       .then(function (dbPost) {

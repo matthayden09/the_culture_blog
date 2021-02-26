@@ -9,11 +9,17 @@ $(document).ready(() => {
   var blogContainer = $(".blog-container");
   var author;
   var post;
+  var authorPost;
 
 $.get("/api/user_data", data => {
-  console.log(data.email)
-  author = data.email
+  console.log(data)
+  author = data.id
 })
+
+// $.get("/api/posts/", data => {
+//   console.log(data)
+  
+// })
 
 
   $(document).on("click", "button.delete", postDelete)
@@ -63,7 +69,7 @@ $.get("/api/user_data", data => {
   function createPost(post){
     const postCard = $("<div>");
     postCard.addClass("card");
-    postCard.attr("author", author)
+    postCard.attr("author", post.UserId)
     const postCardHeading = $("<div>");
     postCardHeading.addClass("card-header");
     const deleteBtn = $("<button>");
@@ -150,8 +156,16 @@ $.get("/api/user_data", data => {
       .parent()
       .parent()
       .data("post");
+      console.log(currentPost.UserId)
+      if(author === currentPost.UserId){
       deletePost(currentPost.id)
+    } else {
+      console.log("test")
     }
+
+    }
+
+    
 
 
   $.get("/api/user_data").then(data => {
