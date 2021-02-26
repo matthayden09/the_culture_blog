@@ -2,3 +2,97 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
+#welcome {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color:rgb(214, 159, 56);
+  font-style: italic;
+}
+
+.navbar-brand {
+  padding-left: 30px;
+}
+
+body {
+  /* background-color: aqua; */
+background: rgb(205,219,255);
+background: linear-gradient(312deg, rgba(205,219,255,1) 0%, rgba(98,220,255,1) 100%);
+}
+
+.figure-img {
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  height: auto;
+}
+
+.container {
+  justify-content: center;
+
+}
+
+h2 {
+  text-align: center;
+}
+
+h3 {
+  color:rgb(214, 159, 56);
+}
+
+small {
+  font-weight: bold;
+}
+
+p {
+  margin-top: 10px;
+}
+
+/* .comments-heading {
+  display: flex;
+  align-content: flex-start;
+  float: right;
+}
+
+.comments-section {
+  display: flex;
+  float: right;
+} */
+
+.commentBtn {
+  margin-top: 5px;
+}
+
+.health {
+  font-family: 'Squada One', cursive;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.movies {
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.music {
+  font-family: 'Righteous', cursive;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.tech {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.blog-container {
+  border: solid;
+  padding: 10px;
+  margin: 10px;
+}
+
+.row {
+  padding: 10px;
+  margin: 10px;
+}
