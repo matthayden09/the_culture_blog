@@ -104,6 +104,9 @@ $(document).ready(() => {
     comments.addClass("comments-section");
     postCardBody.append(comments);
 
+    const lineBreak = $("<hr>")
+    postCardBody.append(lineBreak)
+
     // const postCatogory = $("<h5>");
     // postCatogory.text(post.category);
     // postCatogory.css({
@@ -154,7 +157,6 @@ $(document).ready(() => {
 
   function postDelete() {
     var currentPost = $(this)
-      .parent()
       .parent()
       .data("post");
     deletePost(currentPost.id)
