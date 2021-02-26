@@ -2,11 +2,19 @@
 <html lang="en">
 
 <head>
-    <title>Passport Authentication</title>
+    <title>The Culture Blog</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
     <link href="stylesheets/style.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Orbitron&family=Righteous&family=Squada+One&display=swap"
+        rel="stylesheet">
+
+    <script defer src="/socket.io/socket.io.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
@@ -17,6 +25,18 @@
                 {{#if user}}
                 <a class="navbar-brand" href="/logout">
                     Logout
+                </a>
+                <a class="navbar-brand" href="#health">
+                    Health
+                </a>
+                <a class="navbar-brand" href="#movies">
+                    Movies
+                </a>
+                <a class="navbar-brand" href="#music">
+                    Music
+                </a>
+                <a class="navbar-brand" href="#tech">
+                    Tech
                 </a>
                 {{/if}}
             </div>
