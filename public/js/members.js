@@ -1,27 +1,24 @@
 $(document).ready(() => {
-  // This file just does a GET request to figure out which user is logged in
-  // and updates the HTML on the page
 
   var bodyInput = $("#body");
   var titleInput = $("#title");
   var cmsForm = $("#cms");
   var postCategorySelect = $("#list-category");
-  var blogContainer = $(".blog-container");
+  var blogContainer = $("#blog-container");
   var post;
 
   $(document).on("click", "button.delete", postDelete)
 
-
   //retrieve post by catagory from models 
-  function getPost(category){ 
+  function getPost(category) {
     var string = category || "";
-    if(string){
+    if (string) {
       string = "/category/" + string
     }
     $.get("/api/posts" + string, data => {
       console.log("post ", data)
       post = data
-      if(!post || !post.length){
+      if (!post || !post.length) {
         displayEmpty();
       } else {
         initialize();
@@ -32,69 +29,96 @@ $(document).ready(() => {
   getPost()
 
 
-  function deletePost(id){
+  function deletePost(id) {
     $.ajax({
       method: "DELETE",
       url: "/api/posts/" + id
     })
-    .then(function(){
-      getPost()
-    })
+      .then(function () {
+        getPost()
+      })
   }
 
   // grab post array and render a new post card 
-  function initialize(){
+  function initialize() {
     blogContainer.empty();
     var postAdd = [];
-    for(var i = 0; i < post.length; i++){
+    for (var i = 0; i < post.length; i++) {
       postAdd.push(createPost(post[i]))
     }
     blogContainer.append(postAdd);
   }
 
   // render post card 
-  function createPost(post){
+  function createPost(post) {
     const postCard = $("<div>");
     postCard.addClass("card");
     const postCardHeading = $("<div>");
     postCardHeading.addClass("card-header");
     const deleteBtn = $("<button>");
-    deleteBtn.text("delete");
+    deleteBtn.text("delete article");
     deleteBtn.addClass("delete btn btn-danger");
-    const editBtn = $("<button>");
-    editBtn.text("Edit");
-    editBtn.addClass("edit btn btn-default");
-    const postTitle = $("<h2>");
-    const postDate = $("<small>");
-    const postCatogory = $("<h5>");
-    postCatogory.text(post.category);
-    postCatogory.css({
-      float: "right",
-      "font-weight": "700",
-      "margin-top":
-      "-15px"
+    deleteBtn.css({
+      "margin-top": "5px"
     });
+    const editBtn = $("<button>");
+    editBtn.text("Edit article");
+    editBtn.addClass("edit btn btn-secondary");
+    editBtn.css({
+      "margin-left": "5px",
+      "margin-top": "5px"
+    });
+    const postTitle = $("<h3>");
+    const postDate = $("<small>");
     const postCardBody = $("<div>")
     postCardBody.addClass("card-body");
     const postBody = $("<p>");
     postTitle.text(post.title + "");
-    postBody.text(post.body)
+    postBody.text(post.body);
     const formatDate = new Date(post.createdAt).toLocaleDateString();
     postDate.text(formatDate);
-    postTitle.append(postDate);
-    postCardHeading.append(deleteBtn);
-    postCardHeading.append(editBtn);
     postCardHeading.append(postTitle);
-    postCardHeading.append(postCatogory);
     postCardBody.append(postBody);
     postCard.append(postCardHeading);
+    postCard.append(postDate);
     postCard.append(postCardBody);
+    const likeBtn = $("<button>");
+    likeBtn.text("Like");
+    likeBtn.addClass("btn-primary")
+    postCardBody.append(likeBtn)
+    const commentBtn = $("<button>");
+    commentBtn.text("Comment");
+    commentBtn.addClass("btn-info");
+    commentBtn.css({
+      "margin-left": "5px",
+      "margin-bottom": "10px"
+    });
+    postCardBody.append(commentBtn)
+    postCard.append(deleteBtn);
+    postCard.append(editBtn);
     postCard.data("post", post);
+    const commentHeading = $("<h4>Comments</h4>");
+    commentHeading.addClass("comments-heading");
+    postCardBody.append(commentHeading);
+    const comments = $("<textArea>");
+    comments.addClass("comments-section");
+    postCardBody.append(comments);
+
+    const lineBreak = $("<hr>")
+    postCardBody.append(lineBreak)
+
+    // const postCatogory = $("<h5>");
+    // postCatogory.text(post.category);
+    // postCatogory.css({
+    //   float: "right",
+    //   "font-weight": "700",
+    //   "margin-top":
+    //     "-15px"
+    // });
+    // postCardHeading.append(postCatogory);
+
     return postCard
   }
-
-
-
 
   // function for no post 
   function displayEmpty() {
@@ -105,20 +129,14 @@ $(document).ready(() => {
     blogContainer.append(messageH2);
   }
 
-
-
-  
-  postCategorySelect.val("Personal");
-
-
-  //user submit new post 
+  // user submit new post 
   $(cmsForm).on("submit", function handleFormSubmit(event) {
     event.preventDefault();
-  
+
     if (!titleInput.val().trim() || !bodyInput.val().trim()) {
       return;
     }
-    
+
     var newPost = {
       title: titleInput.val().trim(),
       body: bodyInput.val().trim(),
@@ -132,31 +150,27 @@ $(document).ready(() => {
 
   //once submited refresh the page 
   function submitPost(Post) {
-    $.post("/api/posts/", Post, function() {
+    $.post("/api/posts/", Post, function () {
       window.location.href = "/members";
     });
   }
 
-    function postDelete(){
-      var currentPost = $(this)
-      .parent()
+  function postDelete() {
+    var currentPost = $(this)
       .parent()
       .data("post");
-      deletePost(currentPost.id)
-    }
-
+    deletePost(currentPost.id)
+  }
 
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
     var name = data.email;
 
+    // chat 
     const socket = io.connect("http://localhost:8080");
     const messageContainer = document.getElementById("message-container")
     const messageForm = document.getElementById("send-container")
     const messageInput = document.getElementById("message-input")
-
-
-    
 
     socket.emit("new-user", name);
 
