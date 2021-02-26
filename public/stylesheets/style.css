@@ -14,9 +14,10 @@ form.login {
 }
 
 body {
-  /* background-color: aqua; */
+
 background: rgb(205,219,255);
 background: linear-gradient(312deg, rgba(205,219,255,1) 0%, rgba(98,220,255,1) 100%);
+
 }
 
 .figure-img {
@@ -35,9 +36,11 @@ h2 {
   text-align: center;
 }
 
+
 h3 {
   color:rgb(214, 159, 56);
 }
+
 
 small {
   font-weight: bold;
