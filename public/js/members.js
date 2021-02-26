@@ -105,7 +105,7 @@ $(document).ready(() => {
     postCardBody.append(comments);
 
     const lineBreak = $("<hr>")
-    postCardBody.append(lineBreak)
+    postCard.append(lineBreak)
 
     // const postCatogory = $("<h5>");
     // postCatogory.text(post.category);
