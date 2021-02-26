@@ -27,7 +27,26 @@ h2 {
   text-align: center;
 }
 
-h3 {
+small {
+  font-weight: bold;
+}
+
+p {
+  margin-top: 10px;
+}
+
+/* .comments-heading {
+  display: flex;
+  align-content: flex-start;
+  float: right;
+}
+
+.comments-section {
+  display: flex;
+  float: right;
+} */
+
+.commentBtn {
   margin-top: 5px;
 }
 

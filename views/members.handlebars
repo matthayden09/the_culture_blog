@@ -2,10 +2,20 @@
 
   <div class="row">
     <div class="header">
-      <h1>Welcome <span class="member-name"></span></h1>
+      <h1>Welcome<span class="member-name"></span></h1>
+    </div>
 
+  </div>
+
+  <div class="container">
+    <figure class="figure">
+      <img src="https://miro.medium.com/max/950/1*_JR5_qc4efQmjPuSJ4fRBA.png" class="figure-img" alt="main image">
+    </figure>
+
+    <div class="container">
       <div class="row">
         <div class="col-md-6">
+          <h3>Chat</h3>
 
           {{!-- socket.io message container --}}
           <div id="message-container"></div>
@@ -15,21 +25,46 @@
           </form>
 
         </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Add a new article</h3>
+          <form id="cms">
+            <div class="form-group">
+              <label for="title">Title:</label>
+              <input type="text" class="form-control" id="title">
+              <br />
+              <label for="body">Body:</label>
+              <textarea class="form-control" rows="10" id="body"></textarea>
+              <div class="form-group">
+                <br>
+                <label for="category">Select Category:</label>
+                <select class="custom-select" id="list-category">
+                  <option value="Health">Health</option>
+                  <option value="Movies">Movies</option>
+                  <option value="Music">Music</option>
+                  <option value="Tech">Tech</option>
+                </select>
+              </div>
+              <br />
+              <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
+            </div>
+          </form>
+        </div>
 
       </div>
     </div>
-  </div>
-  <div class="container">
-    <figure class="figure">
-      <img src="https://miro.medium.com/max/950/1*_JR5_qc4efQmjPuSJ4fRBA.png" class="figure-img" alt="main image">
-    </figure>
+
     <div class="row">
       <div class="header">
         <h2 class="health" id="health">HEALTH</h2>
       </div>
-      <div class="article col-md-12">
-        <h3>Article 1</h3>
-        <p class="blog-container">
+      <div id="blog-container" class="article col-md-12">
+        <h3 id="title">Article 1</h3>
+        <p id="body">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias aliquid rerum, consequatur laborum
           distinctio
           provident facilis quasi nam veritatis deserunt sapiente repellat dicta dolorum corrupti veniam aspernatur
@@ -38,11 +73,14 @@
           Ratione
           repellat quas vero soluta laboriosam accusamus?
         </p>
-        <button class="likeBtn" id="healthLike1">Like</button>
-        <h4>Comments</h4>
-        <textarea class="textArea" id="healthTextArea1"></textarea>
-        <br>
-        <button class="commentBtn" id="healthComment1">Comment</button>
+        <div class="commentsContainer">
+          <button class="likeBtn">Like</button>
+          <br>
+          <button class="commentBtn">Comment</button>
+          <br>
+          <h4>Comments</h4>
+          <textarea class="textArea"></textarea>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -57,11 +95,14 @@
           Ratione
           repellat quas vero soluta laboriosam accusamus?
         </p>
-        <button class="likeBtn" id="healthLike2">Like</button>
-        <h4>Comments</h4>
-        <textarea class="textArea" id="healthTextArea2"></textarea>
-        <br>
-        <button class="commentBtn" id="healthComment2">Comment</button>
+        <div class="commentsContainer">
+          <button class="likeBtn">Like</button>
+          <br>
+          <button class="commentBtn">Comment</button>
+          <br>
+          <h4>Comments</h4>
+          <textarea class="textArea"></textarea>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -78,11 +119,14 @@
           dolor quo, fugiat voluptatibus ex impedit facere architecto nulla totam beatae fuga perspiciatis ipsa sapiente
           odit sint reiciendis mollitia!
         </p>
-        <button class="likeBtn" id="moviesLike1">Like</button>
-        <h4>Comments</h4>
-        <textarea class="textArea" id="moviesTextArea1"></textarea>
-        <br>
-        <button class="commentBtn" id="moviesComment1">Comment</button>
+        <div class="commentsContainer">
+          <button class="likeBtn">Like</button>
+          <br>
+          <button class="commentBtn">Comment</button>
+          <br>
+          <h4>Comments</h4>
+          <textarea class="textArea"></textarea>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -97,11 +141,14 @@
           Ratione
           repellat quas vero soluta laboriosam accusamus?
         </p>
-        <button class="likeBtn" id="moviesLike2">Like</button>
-        <h4>Comments</h4>
-        <textarea class="textArea" id="moviesTextArea2"></textarea>
-        <br>
-        <button class="commentBtn" id="moviesComment2">Comment</button>
+        <div class="commentsContainer">
+          <button class="likeBtn">Like</button>
+          <br>
+          <button class="commentBtn">Comment</button>
+          <br>
+          <h4>Comments</h4>
+          <textarea class="textArea"></textarea>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -119,11 +166,14 @@
           Ratione
           repellat quas vero soluta laboriosam accusamus?
         </p>
-        <button class="likeBtn" id="musicLike1">Like</button>
-        <h4>Comments</h4>
-        <textarea class="textArea" id="musicTextArea1"></textarea>
-        <br>
-        <button class="commentBtn" id="musicComment1">Comment</button>
+        <div class="commentsContainer">
+          <button class="likeBtn">Like</button>
+          <br>
+          <button class="commentBtn">Comment</button>
+          <br>
+          <h4>Comments</h4>
+          <textarea class="textArea"></textarea>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -138,11 +188,14 @@
           Ratione
           repellat quas vero soluta laboriosam accusamus?
         </p>
-        <button class="likeBtn" id="musicLike2">Like</button>
-        <h4>Comments</h4>
-        <textarea class="textArea" id="musicTextArea2"></textarea>
-        <br>
-        <button class="commentBtn" id="musicComment2">Comment</button>
+        <div class="commentsContainer">
+          <button class="likeBtn">Like</button>
+          <br>
+          <button class="commentBtn">Comment</button>
+          <br>
+          <h4>Comments</h4>
+          <textarea class="textArea"></textarea>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -159,11 +212,14 @@
           dolor quo, fugiat voluptatibus ex impedit facere architecto nulla totam beatae fuga perspiciatis ipsa sapiente
           odit sint reiciendis mollitia!
         </p>
-        <button class="likeBtn" id="techLike1">Like</button>
-        <h4>Comments</h4>
-        <textarea class="textArea" id="techTextArea1"></textarea>
-        <br>
-        <button class="commentBtn" id="techComment1">Comment</button>
+        <div class="commentsContainer">
+          <button class="likeBtn">Like</button>
+          <br>
+          <button class="commentBtn">Comment</button>
+          <br>
+          <h4>Comments</h4>
+          <textarea class="textArea"></textarea>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -178,103 +234,16 @@
           Ratione
           repellat quas vero soluta laboriosam accusamus?
         </p>
-        <button class="likeBtn" id="techLike2">Like</button>
-        <h4>Comments</h4>
-        <textarea class="textArea" id="techTextArea2"></textarea>
-        <br>
-        <button class="commentBtn" id="techComment2">Comment</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-5 offset-md-3">
-        <form id="cms">
-          <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title">
-            <br />
-            <label for="body">Body:</label>
-            <textarea class="form-control" rows="10" id="body"></textarea>
-            <div class="form-group">
-              <label for="category">Select Category:</label>
-              <select class="custom-select" id="list-category">
-                <option value="Personal">Personal</option>
-              </select>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 blog-container">
-
-
-      {{!-- {{#each posts}}
-      <div class="card">
-        <div class="card-header">
-          <button class="delete btn btn-danger">Delete</button>
-          <button class="edit btn btn-default">Edit</button>
-          <h2>{{this.title}}
-            <small>{{this.createdAt}}</small>
-          </h2>
-          <h5>{{this.category}}</h5>
-        </div>
-        <div class="card-body">
-          <p>{{this.body}}</p>
+        <div class="commentsContainer">
+          <button class="likeBtn">Like</button>
+          <br>
+          <button class="commentBtn">Comment</button>
+          <br>
+          <h4>Comments</h4>
+          <textarea class="textArea"></textarea>
         </div>
       </div>
-      {{/each}} --}}
-
-
     </div>
   </div>
-</div>
-<br>
-<br>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-5 offset-md-3">
-      <form id="cms">
-        <div class="form-group">
-          <label for="title">Title:</label>
-          <input type="text" class="form-control" id="title">
-          <br />
-          <label for="body">Body:</label>
-          <textarea class="form-control" rows="10" id="body"></textarea>
-          <div class="form-group">
-            <label for="category">Select Category:</label>
-            <select class="custom-select" id="list-category">
-              <option value="Personal">Personal</option>
-            </select>
-          </div>
-          <br />
-          <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-<div id="message-container"></div>
-<form id="send-container">
-  <input type="text" id="message-input">
-  <button type="submit" id="send-button">Send</button>
-</form>
-</div>
-</div>
-</div>
-
 
 <script type="text/javascript" src="js/members.js"></script>
