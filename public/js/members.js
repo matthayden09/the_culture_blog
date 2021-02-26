@@ -5,7 +5,14 @@ $(document).ready(() => {
   var cmsForm = $("#cms");
   var postCategorySelect = $("#list-category");
   var blogContainer = $("#blog-container");
+  var author;;
   var post;
+
+  $.get("/api/user_data", data => {
+    console.log(data)
+    author = data.id
+  })
+
 
   $(document).on("click", "button.delete", postDelete)
 
@@ -159,7 +166,12 @@ $(document).ready(() => {
     var currentPost = $(this)
       .parent()
       .data("post");
+      console.log(currentPost.UserId)
+      if(author === currentPost.UserId){
     deletePost(currentPost.id)
+  } else {
+    console.log("test")
+  }
   }
 
   $.get("/api/user_data").then(data => {
