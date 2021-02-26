@@ -160,12 +160,12 @@ $(document).ready(() => {
 
     socket.emit("new-user", name);
 
-    socket.on("user-connected", name => {
-      appendMessage(`${name} connected`)
+    socket.on("user-disconnect", name => {
+      appendMessage(`${name} disconnected`)
     })
 
-    socket.on("user-disconnected", name => {
-      appendMessage(`${name} disconnected`)
+    socket.on("user-connected", name => {
+      appendMessage(`${name} connected`)
     })
 
     socket.on("chat-message", data => {
