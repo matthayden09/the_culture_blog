@@ -19,6 +19,18 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: "Personal"
     }
   });
+
+  Post.associate = function (models) {
+    Post.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    })
+
+  }
+
+
+
   return Post;
 };
 
@@ -46,14 +58,7 @@ module.exports = function (sequelize, DataTypes) {
 //       }
 //     });
 
-//     Post.associate = function(models) {
-//         Post.belongsTo(models.Author, {
-//             foreignKey: {
-//                 allowNull: false
-//             }
-//         })
 
-//     }
 //     return Post;
 
 //   };
