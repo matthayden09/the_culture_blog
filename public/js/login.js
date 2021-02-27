@@ -34,6 +34,7 @@ $(document).ready(() => {
       })
       .catch(err => {
         console.log(err);
+        alert("Not a valid email/password combination")
       });
   }
 });
