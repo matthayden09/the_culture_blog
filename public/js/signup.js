@@ -36,7 +36,7 @@ $(document).ready(() => {
   }
 
   function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
+    $("#alert .msg").text("Not a valid email or password");
     $("#alert").fadeIn(500);
   }
 });
