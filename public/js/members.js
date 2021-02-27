@@ -9,7 +9,7 @@ $(document).ready(() => {
   var movieContainer = $('#movie-container')
   var techContainer = $('#tech-container')
   var musicContainer = $('#music-container')
-  var author;;
+  var author;
   var post;
 
   $.get("/api/user_data", data => {
