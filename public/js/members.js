@@ -127,6 +127,13 @@ $(document).ready(() => {
     postCard.append(postDate);
     postCard.append(postCardBody);
     const likeBtn = $("<button>");
+
+    let likes = 0;
+    likeBtn.click(function() {
+      likes++
+      likeBtn.text(likes + " likes");
+    });
+
     likeBtn.text("Like");
     likeBtn.addClass("btn-primary")
     postCardBody.append(likeBtn)
