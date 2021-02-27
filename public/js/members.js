@@ -172,7 +172,7 @@ $.get("/api/user_data", data => {
     $(".member-name").text(data.email);
     var name = data.email;
 
-    const socket = io.connect("http://localhost:8080");
+    const socket = io.connect("http://localhost:8080", { transport : ['websocket'] });
     const messageContainer = document.getElementById("message-container")
     const messageForm = document.getElementById("send-container")
     const messageInput = document.getElementById("message-input")
