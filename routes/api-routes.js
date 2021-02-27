@@ -76,6 +76,7 @@ module.exports = function (app) {
       body: req.body.body,
       category: req.body.category,
       UserId: req.user.id
+      // Comment: req.comment
     })
       .then(function (dbPost) {
         res.json(dbPost);

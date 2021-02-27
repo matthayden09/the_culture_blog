@@ -1,5 +1,5 @@
 $(document).ready(() => {
-
+///----establishing variables----------
   var bodyInput = $("#body");
   var titleInput = $("#title");
   var cmsForm = $("#cms");
@@ -11,16 +11,20 @@ $(document).ready(() => {
   var musicContainer = $('#music-container')
   var author;;
   var post;
-
-  $.get("/api/user_data", data => {
+//------------current user id-------------
+  
+$.get("/api/user_data", data => {
     console.log(data)
     author = data.id
   })
+
+  ////---onclick delete------------------
 
 
   $(document).on("click", "button.delete", postDelete)
 
   //retrieve post by catagory from models 
+
   function getPost(category) {
     var string = category || "";
     if (string) {
@@ -91,7 +95,7 @@ $(document).ready(() => {
     }
   }
 
-  // render post card 
+  // render post card ---------------------
 
   function createPost(post) {
     const postCard = $("<div>");
@@ -145,7 +149,11 @@ $(document).ready(() => {
     commentHeading.addClass("comments-heading");
     postCardBody.append(commentHeading);
     const comments = $("<textArea>");
-    comments.addClass("comments-section");
+
+
+
+    comments.addClass("form-control");
+    comments.attr("id", "comments-section")
     postCardBody.append(comments);
 
     const lineBreak = $("<hr>")
@@ -165,7 +173,7 @@ $(document).ready(() => {
   }
 
 
-  // function for no post 
+  // function for no post ----------------------
   function displayEmpty() {
     blogContainer.empty();
     var messageH2 = $("<h2>");
@@ -174,7 +182,24 @@ $(document).ready(() => {
     blogContainer.append(messageH2);
   }
 
-  // user submit new post 
+
+
+
+  // $(document).on( "click", "button.btn-info", function handleComments(event){
+  //   event.preventDefault();
+  //   if (!$("#comments-section").val().trim()){
+  //     return;
+  //   }
+  //   var newComment = {
+  //     comment: $("#comments-section").val().trim()
+  //   }
+  //   console.log(newComment)
+  //   submitPost(newComment)
+  // })
+
+
+
+  // user submit new post -------------------------
   $(cmsForm).on("submit", function handleFormSubmit(event) {
     event.preventDefault();
 
@@ -193,13 +218,16 @@ $(document).ready(() => {
 
   });
 
-  //once submited refresh the page 
+  //once submited refresh the page ------------
   function submitPost(Post) {
     $.post("/api/posts/", Post, function () {
       window.location.href = "/members";
     });
   }
 
+
+
+//-----------Delete function-----------------
   function postDelete() {
     var currentPost = $(this)
       .parent()
@@ -212,6 +240,13 @@ $(document).ready(() => {
     }
   }
 
+
+
+
+
+
+
+  ///--------------------------
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
     var name = data.email;
