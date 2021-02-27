@@ -5,7 +5,18 @@ $(document).ready(() => {
   var cmsForm = $("#cms");
   var postCategorySelect = $("#list-category");
   var blogContainer = $("#blog-container");
+  var healthContainer = $('#health-container')
+  var movieContainer = $('#movie-container')
+  var techContainer = $('#tech-container')
+  var musicContainer = $('#music-container')
+  var author;;
   var post;
+
+  $.get("/api/user_data", data => {
+    console.log(data)
+    author = data.id
+  })
+
 
   $(document).on("click", "button.delete", postDelete)
 
@@ -42,17 +53,50 @@ $(document).ready(() => {
   // grab post array and render a new post card 
   function initialize() {
     blogContainer.empty();
-    var postAdd = [];
+    healthContainer.empty();
+    movieContainer.empty();
+    techContainer.empty()
+    musicContainer.empty()
+
+    let moviepostAdd = [];
+    let musicpostAdd = [];
+    let healthpostAdd = [];
+    let techpostAdd = []
+    var postAdd = []
     for (var i = 0; i < post.length; i++) {
-      postAdd.push(createPost(post[i]))
+
+      let currentPost = post[i]
+      let currentCat = currentPost.category
+      if (currentCat == 'Movies') {
+        moviepostAdd.push(createPost(post[i]))
+        movieContainer.append(moviepostAdd)
+        console.log('movies')
+      } else if (currentCat == 'Music') {
+        musicpostAdd.push(createPost(post[i]))
+        musicContainer.append(musicpostAdd)
+        console.log('Music')
+      } else if (currentCat == 'Health') {
+        healthpostAdd.push(createPost(post[i]))
+        healthContainer.append(healthpostAdd)
+        console.log('Health')    // postAdd.push(createPost(post[i]))
+
+      } else {
+        techpostAdd.push(createPost(post[i]))
+        techContainer.append(techpostAdd)
+        console.log('Health')    // postAdd.push(createPost(post[i]))
+
+      }
+
+      // blogContainer.append(postAdd);
     }
-    blogContainer.append(postAdd);
   }
 
   // render post card 
+
   function createPost(post) {
     const postCard = $("<div>");
     postCard.addClass("card");
+    postCard.attr("author", post.UserId)
     const postCardHeading = $("<div>");
     postCardHeading.addClass("card-header");
     const deleteBtn = $("<button>");
@@ -127,6 +171,7 @@ $(document).ready(() => {
     return postCard
   }
 
+
   // function for no post 
   function displayEmpty() {
     blogContainer.empty();
@@ -166,7 +211,12 @@ $(document).ready(() => {
     var currentPost = $(this)
       .parent()
       .data("post");
-    deletePost(currentPost.id)
+    console.log(currentPost.UserId)
+    if (author === currentPost.UserId) {
+      deletePost(currentPost.id)
+    } else {
+      console.log("test")
+    }
   }
 
   $.get("/api/user_data").then(data => {
