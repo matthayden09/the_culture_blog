@@ -84,12 +84,13 @@ $(document).ready(() => {
     postCard.append(postCardBody);
     const likeBtn = $("<button>");
 
-    // let likes = 0
-    // likeBtn.addEventListener("click", addLike)
-    // function addLike() {
+    // let likes = 0;
+    // likeBtn.click(function() {
     //   likes++
-    // }
-    // likeBtn.text("Like " + likes);
+    // });
+    // likeBtn.text(likes + " likes");
+    // console.log(likes)
+
     likeBtn.text("Like");
     likeBtn.addClass("btn-primary")
     postCardBody.append(likeBtn)

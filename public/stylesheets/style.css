@@ -17,7 +17,11 @@ body {
 
 background: rgb(205,219,255);
 background: linear-gradient(312deg, rgba(205,219,255,1) 0%, rgba(98,220,255,1) 100%);
-
+/* fixes background height */
+height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .figure-img {
