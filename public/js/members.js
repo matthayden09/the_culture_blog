@@ -224,7 +224,7 @@ $(document).ready(() => {
     var name = data.email;
 
     // chat 
-    const socket = io.connect("http://localhost:8080");
+    const socket = io.connect("https://gentle-cliffs-54160.herokuapp.com/");
     const messageContainer = document.getElementById("message-container")
     const messageForm = document.getElementById("send-container")
     const messageInput = document.getElementById("message-input")
