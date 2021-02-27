@@ -99,7 +99,7 @@ $.get("/api/user_data", data => {
 
   function createPost(post) {
     // var postCard = `
-    // <div class="card" author="${post.UserId}">
+    // <div class="card"  author="${post.UserId}">
     //     <div class="card-header">
     //         <h3>${post.title}</h3>
     //     </div>
@@ -116,7 +116,7 @@ $.get("/api/user_data", data => {
     //     <button class="edit btn btn-secondary" style="margin-left: 5px; margin-top: 5px;">Edit article</button>
     // </div>
     // `
-    // console.log($(".card").data("post", post))
+    // $("div.card").data("post", post )
     
 
     
@@ -181,15 +181,15 @@ $.get("/api/user_data", data => {
     const lineBreak = $("<hr>")
     postCardBody.append(lineBreak)
 
-    // const postCatogory = $("<h5>");
-    // postCatogory.text(post.category);
-    // postCatogory.css({
-    //   float: "right",
-    //   "font-weight": "700",
-    //   "margin-top":
-    //     "-15px"
-    // });
-    // postCardHeading.append(postCatogory);
+    const postCatogory = $("<h5>");
+    postCatogory.text(post.category);
+    postCatogory.css({
+      float: "right",
+      "font-weight": "700",
+      "margin-top":
+        "-15px"
+    });
+    postCardHeading.append(postCatogory);
 
     return postCard
   }
@@ -253,7 +253,6 @@ $.get("/api/user_data", data => {
   function postDelete() {
     var currentPost = $(this)
       .parent()
-
       .data("post");
     console.log(currentPost.UserId)
     if (author === currentPost.UserId) {
