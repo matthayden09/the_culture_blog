@@ -55,14 +55,14 @@ $(document).ready(() => {
     blogContainer.empty();
     healthContainer.empty();
     movieContainer.empty();
-    techContainer.empty()
-    musicContainer.empty()
+    techContainer.empty();
+    musicContainer.empty();
 
     let moviepostAdd = [];
     let musicpostAdd = [];
     let healthpostAdd = [];
-    let techpostAdd = []
-    var postAdd = []
+    let techpostAdd = [];
+    var postAdd = [];
     for (var i = 0; i < post.length; i++) {
 
       let currentPost = post[i]
@@ -150,19 +150,8 @@ $(document).ready(() => {
     const lineBreak = $("<hr>")
     postCardBody.append(lineBreak)
 
-    // const postCatogory = $("<h5>");
-    // postCatogory.text(post.category);
-    // postCatogory.css({
-    //   float: "right",
-    //   "font-weight": "700",
-    //   "margin-top":
-    //     "-15px"
-    // });
-    // postCardHeading.append(postCatogory);
-
     return postCard
   }
-
 
   // function for no post 
   function displayEmpty() {
@@ -192,7 +181,7 @@ $(document).ready(() => {
 
   });
 
-  //once submited refresh the page 
+  // once submited refresh the page 
   function submitPost(Post) {
     $.post("/api/posts/", Post, function () {
       window.location.href = "/members";
