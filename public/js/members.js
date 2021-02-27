@@ -98,6 +98,28 @@ $.get("/api/user_data", data => {
   // render post card ---------------------
 
   function createPost(post) {
+    // var postCard = `
+    // <div class="card" author="${post.UserId}">
+    //     <div class="card-header">
+    //         <h3>${post.title}</h3>
+    //     </div>
+    //     <small>${new Date(post.createdAt).toLocaleDateString()}</small>
+    //     <div class="card-body">
+    //         <p>${post.body}</p>
+    //         <button class="btn-primary">Like</button>
+    //         <button class="btn-info" style="margin-left: 5px; margin-bottom: 10px;">Comment</button>
+    //         <h4 class="comments-heading">Comments</h4>
+    //         <textarea class="form-control" id="comments-section"></textarea>
+    //         <hr>
+    //     </div>
+    //     <button class="delete btn btn-danger" style="margin-top: 5px;">delete</button>
+    //     <button class="edit btn btn-secondary" style="margin-left: 5px; margin-top: 5px;">Edit article</button>
+    // </div>
+    // `
+    // console.log($(".card").data("post", post))
+    
+
+    
     const postCard = $("<div>");
     postCard.addClass("card");
     postCard.attr("author", post.UserId)
@@ -231,6 +253,7 @@ $.get("/api/user_data", data => {
   function postDelete() {
     var currentPost = $(this)
       .parent()
+
       .data("post");
     console.log(currentPost.UserId)
     if (author === currentPost.UserId) {
