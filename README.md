@@ -20,11 +20,14 @@ This project is a blog and CMS system about different cultural topics that allow
  7. [Tests](#Tests)
 
 ## Installation
-Log on to the blog here: (https://gentle-cliffs-54160.herokuapp.com/)
+Log on to the blog [here](https://gentle-cliffs-54160.herokuapp.com/)
 
+## Screenshot
+
+![screenshot](screenshot.png)
 
 ## Usage
-Any user who wishes to contribute to the blog can do so by signing up for an account at the deployed 
+Any user who wishes to contribute to the blog can do so by signing up for an account at the deployed [here](https://gentle-cliffs-54160.herokuapp.com/)
 
 
 
@@ -41,5 +44,3 @@ Contact us here:
 
 ## License
 CC
-
-## Tests
