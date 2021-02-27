@@ -6,7 +6,7 @@ $(document).ready(() => {
   var postCategorySelect = $("#list-category");
   var blogContainer = $("#blog-container");
   var healthContainer = $('#health-container')
-  var movieContainer= $('#movie-container')
+  var movieContainer = $('#movie-container')
   var techContainer = $('#tech-container')
   var musicContainer = $('#music-container')
   var author;;
@@ -64,14 +64,14 @@ $(document).ready(() => {
     let techpostAdd = []
     var postAdd = []
     for (var i = 0; i < post.length; i++) {
-      
+
       let currentPost = post[i]
       let currentCat = currentPost.category
       if (currentCat == 'Movies') {
         moviepostAdd.push(createPost(post[i]))
         movieContainer.append(moviepostAdd)
         console.log('movies')
-      } else if (currentCat =='Music') {
+      } else if (currentCat == 'Music') {
         musicpostAdd.push(createPost(post[i]))
         musicContainer.append(musicpostAdd)
         console.log('Music')
@@ -79,23 +79,24 @@ $(document).ready(() => {
         healthpostAdd.push(createPost(post[i]))
         healthContainer.append(healthpostAdd)
         console.log('Health')    // postAdd.push(createPost(post[i]))
-  
+
       } else {
         techpostAdd.push(createPost(post[i]))
         techContainer.append(techpostAdd)
         console.log('Health')    // postAdd.push(createPost(post[i]))
 
       }
-  
-    // blogContainer.append(postAdd);
+
+      // blogContainer.append(postAdd);
+    }
   }
-}
 
   // render post card 
- 
+
   function createPost(post) {
     const postCard = $("<div>");
     postCard.addClass("card");
+    postCard.attr("author", post.UserId)
     const postCardHeading = $("<div>");
     postCardHeading.addClass("card-header");
     const deleteBtn = $("<button>");
@@ -203,12 +204,12 @@ $(document).ready(() => {
     var currentPost = $(this)
       .parent()
       .data("post");
-      console.log(currentPost.UserId)
-      if(author === currentPost.UserId){
-    deletePost(currentPost.id)
-  } else {
-    console.log("test")
-  }
+    console.log(currentPost.UserId)
+    if (author === currentPost.UserId) {
+      deletePost(currentPost.id)
+    } else {
+      console.log("test")
+    }
   }
 
   $.get("/api/user_data").then(data => {
