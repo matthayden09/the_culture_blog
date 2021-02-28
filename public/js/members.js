@@ -1,5 +1,5 @@
 $(document).ready(() => {
-
+  //Establish variables 
   var bodyInput = $("#body");
   var titleInput = $("#title");
   var cmsForm = $("#cms");
@@ -11,35 +11,28 @@ $(document).ready(() => {
   var musicContainer = $('#music-container')
   var author;
   var post;
-
+  //Grasp Author id
   $.get("/api/user_data", data => {
     console.log(data)
     author = data.id
   })
 
-
+  //Delete onClick 
   $(document).on("click", "button.delete", postDelete)
 
-  //retrieve post by catagory from models 
-  function getPost(category) {
-    var string = category || "";
-    if (string) {
-      string = "/category/" + string
-    }
-    $.get("/api/posts" + string, data => {
+  //Grab post form api route 
+  function getPost() {
+    $.get("/api/posts", data => {
       console.log("post ", data)
       post = data
-      if (!post) {
-        displayEmpty();
-      } else {
-        initialize();
-      }
+      if (post) {
+        initialize()
+      } 
     })
   }
-
   getPost()
 
-
+  //Delete post from api
   function deletePost(id) {
     $.ajax({
       method: "DELETE",
@@ -50,7 +43,7 @@ $(document).ready(() => {
       })
   }
 
-  // grab post array and render a new post card 
+  //Post by category
   function initialize() {
     blogContainer.empty();
     healthContainer.empty();
@@ -63,6 +56,7 @@ $(document).ready(() => {
     let healthpostAdd = [];
     let techpostAdd = []
     var postAdd = []
+
     for (var i = 0; i < post.length; i++) {
 
       let currentPost = post[i]
@@ -79,42 +73,45 @@ $(document).ready(() => {
         healthpostAdd.push(createPost(post[i]))
         healthContainer.append(healthpostAdd)
         console.log('Health')    // postAdd.push(createPost(post[i]))
-
       } else {
         techpostAdd.push(createPost(post[i]))
         techContainer.append(techpostAdd)
         console.log('Health')    // postAdd.push(createPost(post[i]))
-
       }
-
       // blogContainer.append(postAdd);
     }
   }
 
-  // render post card 
-
+ 
+  //Create post card
   function createPost(post) {
-    const postCard = $("<div>");
-    postCard.addClass("card");
-    const postCardHeading = $("<div>");
-    postCardHeading.addClass("card-header");
-    const deleteBtn = $("<button>");
-    deleteBtn.text("delete article");
-    deleteBtn.addClass("delete btn btn-danger");
-    deleteBtn.css({
+    const postCard = $("<div>")
+    .addClass("card");
+
+    const postCardHeading = $("<div>")
+    .addClass("card-header");
+    //Delete button 
+    const deleteBtn = $("<button>")
+    .text("delete article")
+    .addClass("delete btn btn-danger")
+    .css({
       "margin-top": "5px"
     });
-    const editBtn = $("<button>");
-    editBtn.text("Edit article");
-    editBtn.addClass("edit btn btn-secondary");
-    editBtn.css({
+    //Edit button
+    const editBtn = $("<button>")
+    .text("Edit article")
+    .addClass("edit btn btn-secondary")
+    .css({
       "margin-left": "5px",
       "margin-top": "5px"
     });
+
     const postTitle = $("<h3>");
     const postDate = $("<small>");
+
     const postCardBody = $("<div>")
-    postCardBody.addClass("card-body");
+    .addClass("card-body");
+    //Body
     const postBody = $("<p>");
     postTitle.text(post.title + "");
     postBody.text(post.body);
@@ -122,91 +119,73 @@ $(document).ready(() => {
     postDate.text(formatDate);
     postCardHeading.append(postTitle);
     postCardBody.append(postBody);
+  
     postCard.append(postCardHeading);
     postCard.append(postDate);
     postCard.append(postCardBody);
-    const likeBtn = $("<button>");
-    likeBtn.text("Like");
-    likeBtn.addClass("btn-primary")
+    //Like Button
+    const likeBtn = $("<button>")
+    .text("Like")
+    .addClass("btn-primary");
     postCardBody.append(likeBtn)
-    const commentBtn = $("<button>");
-    commentBtn.text("Comment");
-    commentBtn.addClass("btn-info");
-    commentBtn.css({
+    //Comment button
+    const commentBtn = $("<button>")
+    .text("Comment")
+    .addClass("btn-info")
+    .css({
       "margin-left": "5px",
       "margin-bottom": "10px"
     });
     postCardBody.append(commentBtn)
+
     postCard.append(deleteBtn);
     postCard.append(editBtn);
     postCard.data("post", post);
-    const commentHeading = $("<h4>Comments</h4>");
-    commentHeading.addClass("comments-heading");
+    //Comment heading 
+    const commentHeading = $("<h4>")
+    .text("Comments")
+    .addClass("comments-heading");
     postCardBody.append(commentHeading);
-    const comments = $("<textArea>");
-    comments.addClass("comments-section");
+    //Comment textarea 
+    const comments = $("<textArea>")
+    .addClass("comments-section");
     postCardBody.append(comments);
-
+    //Line break
     const lineBreak = $("<hr>")
     postCardBody.append(lineBreak)
-
-    // const postCatogory = $("<h5>");
-    // postCatogory.text(post.category);
-    // postCatogory.css({
-    //   float: "right",
-    //   "font-weight": "700",
-    //   "margin-top":
-    //     "-15px"
-    // });
-    // postCardHeading.append(postCatogory);
-
-    // like button counter
+    //Like button counter
     let likes = 0;
     likeBtn.click(function () {
       likes++
       likeBtn.text(likes + " likes");
     });
 
-
     return postCard
   }
 
-
-  // function for no post 
-  function displayEmpty() {
-    blogContainer.empty();
-    var messageH2 = $("<h2>");
-    messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("No posts yet for this category, navigate here in order to create a new post.");
-    blogContainer.append(messageH2);
-  }
-
-  // user submit new post 
+  //Submit new post 
   $(cmsForm).on("submit", function handleFormSubmit(event) {
     event.preventDefault();
-
     if (!titleInput.val().trim() || !bodyInput.val().trim()) {
       return;
     }
-
     var newPost = {
       title: titleInput.val().trim(),
       body: bodyInput.val().trim(),
       category: postCategorySelect.val()
     };
-
     console.log(newPost);
     submitPost(newPost)
-
   });
 
-  //once submited refresh the page 
+  //Refresh the page once submitted
   function submitPost(Post) {
     $.post("/api/posts/", Post, function () {
       window.location.href = "/members";
     });
   }
 
+  //Delete seleceted post 
   function postDelete() {
     var currentPost = $(this)
       .parent()
@@ -219,45 +198,46 @@ $(document).ready(() => {
     }
   }
 
+  //Socket.io and client email info
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
     var name = data.email;
 
     // chat 
     const socket = io.connect("https://gentle-cliffs-54160.herokuapp.com/");
-    const messageContainer = document.getElementById("message-container")
-    const messageForm = document.getElementById("send-container")
-    const messageInput = document.getElementById("message-input")
+    const messageContainer = $("#message-container")
+    const messageForm = $("#send-container")
+    const messageInput =$("#message-input")
 
     socket.emit("new-user", name);
-
+    //User disconnected 
     socket.on("user-disconnect", name => {
       appendMessage(`${name} disconnected`)
     })
-
+    //User connected 
     socket.on("user-connected", name => {
       appendMessage(`${name} connected`)
     })
-
+    //chat 
     socket.on("chat-message", data => {
       appendMessage(`${data.name}: ${data.message}`)
     })
-
-    messageForm.addEventListener("submit", e => {
+    //Submit chat
+    messageForm.on("submit", e => {
       e.preventDefault()
-      const message = messageInput.value;
+      const message = messageInput.val()
       appendMessage(`You: ${message}`)
       socket.emit("send-chat-message", message)
-      messageInput.value = ""
+      messageInput.val("")
     })
-
+    //Append chat to message div
     function appendMessage(message) {
-      const messageElement = document.createElement("div")
-      messageElement.innerHTML = message;
+      const messageElement = $("<div>")
+      messageElement.html(message)
       messageContainer.append(messageElement)
     }
 
-    appendMessage("you joined");
+    appendMessage("Welcome!");
 
   });
 });
