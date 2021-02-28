@@ -11,6 +11,9 @@ $(document).ready(() => {
   var musicContainer = $('#music-container')
   var author;
   var post;
+  var blogId;
+  var update = false;
+
   //Grasp Author id
   $.get("/api/user_data", data => {
     console.log(data)
@@ -19,6 +22,8 @@ $(document).ready(() => {
 
   //Delete onClick 
   $(document).on("click", "button.delete", postDelete)
+  //Edit post
+  $(document).on("click", "button.edit", postEdit)
 
   //Grab post form api route 
   function getPost() {
@@ -42,6 +47,20 @@ $(document).ready(() => {
         getPost()
       })
   }
+
+  //Update post to api
+  function editPost(index) {
+    $.ajax({
+      method: "PUT",
+      url: "/api/posts/",
+      data: index
+    })
+      .then(function () {
+        getPost()
+      })
+  }
+
+
 
   //Post by category
   function initialize() {
@@ -174,8 +193,16 @@ $(document).ready(() => {
       body: bodyInput.val().trim(),
       category: postCategorySelect.val()
     };
+
+    if(update){
+      newPost.id = blogId;
+      editPost(newPost)
+      bodyInput.val("");
+      titleInput.val("")
+      update = false
+    } else{
     console.log(newPost);
-    submitPost(newPost)
+    submitPost(newPost)}
   });
 
   //Refresh the page once submitted
@@ -185,7 +212,7 @@ $(document).ready(() => {
     });
   }
 
-  //Delete seleceted post 
+  //Delete post 
   function postDelete() {
     var currentPost = $(this)
       .parent()
@@ -193,6 +220,27 @@ $(document).ready(() => {
     console.log(currentPost.UserId)
     if (author === currentPost.UserId) {
       deletePost(currentPost.id)
+    } else {
+      console.log("test")
+    }
+  }
+
+  //Edit post 
+  function postEdit() {
+    var currentPost = $(this)
+      .parent()
+      .data("post");
+    
+    blogId = currentPost.id
+    console.log(blogId)
+    if (author === currentPost.UserId) {
+      var newPost = {
+        title: titleInput.val(currentPost.title),
+        body: bodyInput.val(currentPost.body),
+        category: postCategorySelect.val(currentPost.category)
+      };
+      update = true
+    
     } else {
       console.log("test")
     }

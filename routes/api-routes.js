@@ -82,6 +82,16 @@ module.exports = function (app) {
       });
   });
 
+  app.put("/api/posts", function(req, res) {
+    db.Post.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(dbPost){
+    res.json(dbPost)
+  })
+  })
+
   app.delete("/api/posts/:id", (req, res) => {
     db.Post.destroy({
       where: {
