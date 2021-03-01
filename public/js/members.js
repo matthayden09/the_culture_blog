@@ -29,12 +29,12 @@ $(document).ready(() => {
       string = "/category/" + string
     }
     $.get("/api/posts" + string, data => {
-      // console.log("post ", data)
       post = data
       if (!post) {
         displayEmpty();
       } else {
         initialize();
+       
       }
     })
   }
@@ -90,6 +90,7 @@ $(document).ready(() => {
 
       // blogContainer.append(postAdd);
     }
+
   }
 
   // render post card 
@@ -161,7 +162,13 @@ $(document).ready(() => {
   }
 
   //retrieve comment by post ID from models 
-  function getComment() {
+  function getComment(id) {
+    $.get("/api/comments/" + id , data => {
+      console.log(data)
+      // console.log("post ", data)
+      post = data
+
+    })
     
   }
   
@@ -172,14 +179,15 @@ $(document).ready(() => {
     commentHeading.addClass("comments-heading");
     comments.addClass("comments-section");
     comments.append(commentHeading);
-    comments.append(commentForm);
-    
     const commentForm = $(
       `<form>
         <input type=text placeholder="Enter comment here">
         <button type="submit" id="comment" class="btn-info">Comment</button>
         </form>`
     );
+    
+
+    comments.append(commentForm);
     
     const newComment = $(`<p>${name} commented: </p>`)
     comments.append(newComment)
