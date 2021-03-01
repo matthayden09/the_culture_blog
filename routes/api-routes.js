@@ -91,7 +91,24 @@ module.exports = function (app) {
       .then(function (dbPost) {
         res.json(dbPost)
       })
-  })
+  });
+
+  // routes for posting comments
+  app.get("/api/posts/comments/:id", function (req, res) {
+    db.Comment.findAll({})
+      .then(function (dbComment) {
+        res.json(dbComment);
+      });
+  });
+
+  app.post("/api/comments", function (req, res) {
+    db.Comment.create({
+      input: req.body.post.id
+    })
+      .then(function (dbComment) {
+        res.json(dbComment);
+      });
+  });
 
 
 };

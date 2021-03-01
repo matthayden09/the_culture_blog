@@ -5,7 +5,7 @@ form.login {
 
 #welcome {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color:rgb(214, 159, 56);
+  color:rgb(255, 166, 2);
   font-style: italic;
 }
 
@@ -14,14 +14,25 @@ form.login {
 }
 
 body {
-
-background: rgb(205,219,255);
-background: linear-gradient(312deg, rgba(205,219,255,1) 0%, rgba(98,220,255,1) 100%);
-/* fixes background height */
-height: 100%;
+  background: rgb(205,219,255);
+  background: linear-gradient(312deg, rgba(205,219,255,1) 0%, rgba(98,220,255,1) 100%);
+    /* fixes background height */
+    height: 100%;
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+.main-title {
+  font-family: 'Poiret One', cursive;
+  color:rgb(22, 28, 101);
+  font-weight: bold;
+  font-size: 45px;
+  text-align: center;
+}
+
+.blog {
+  margin-bottom: 50px;
 }
 
 .figure-img {
@@ -42,7 +53,7 @@ h2 {
 
 
 h3 {
-  color:rgb(214, 159, 56);
+  color:rgb(255, 166, 2);
 }
 
 

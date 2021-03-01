@@ -105,14 +105,6 @@ $(document).ready(() => {
     const postCardBody = $("<div>")
     const postBody = $("<p>");
     const likeBtn = $("<button>");
-    const commentHeading = $("<h4>Comments</h4>");
-    const comments = $("<div>");
-    const commentForm = $(
-      `<form>
-      <input type=text placeholder="Enter comment here">
-      <button type="submit" class="comment btn-info">Comment</button>
-      </form>`
-    );
     const deleteBtn = $("<button>");
     const editBtn = $("<button>");
     const lineBreak = $("<hr>")
@@ -122,8 +114,6 @@ $(document).ready(() => {
     postCardHeading.addClass("card-header");
     postCardBody.addClass("card-body");
     likeBtn.addClass("btn-primary")
-    commentHeading.addClass("comments-heading");
-    comments.addClass("comments-section");
     deleteBtn.addClass("delete btn btn-danger");
     editBtn.addClass("edit btn btn-secondary");
 
@@ -146,9 +136,6 @@ $(document).ready(() => {
     postCardBody.append(likeBtn)
     postCard.append(deleteBtn);
     postCard.append(editBtn);
-    postCardBody.append(commentHeading);
-    postCardBody.append(commentForm);
-    postCardBody.append(comments);
     postCard.append(lineBreak)
 
     // css
@@ -168,29 +155,32 @@ $(document).ready(() => {
 
     });
 
-    // backup comment button
-    // const commentBtn = $("<button>");
-    // commentBtn.text("Comment");
-    // commentBtn.addClass("comment btn-info");
-    // commentBtn.css({
-    //   "margin-left": "5px",
-    //   "margin-bottom": "10px"
-    // });
-
-    // postCardBody.append(commentBtn)
-
-    // add a comment
-    function addComment() {
-      const newComment = $(`<p>${name} commented: </p>`)
-      console.log(newComment)
-      comments.append(newComment)
-    }
-
-    $(document).on("click", "button.comment", addComment);
-    
     postCard.data("post", post);
     return postCard
   }
+
+  // function to add a comment
+  // function addComment() {
+  //   const commentHeading = $("<h4>Comments</h4>");
+  //   const comments = $("<div>");
+  //   commentHeading.addClass("comments-heading");
+  //   comments.addClass("comments-section");
+  //   postCardBody.append(commentHeading);
+  //   postCardBody.append(commentForm);
+  //   postCardBody.append(comments);
+  //   const commentForm = $(
+  //     `<form>
+  //       <input type=text placeholder="Enter comment here">
+  //       <button type="submit" id="comment" class="btn-info">Comment</button>
+  //       </form>`
+  //   );
+  //   const newComment = $(`<p>${name} commented: </p>`)
+  //   console.log(newComment)
+  //   comments.append(newComment)
+  // }
+
+  // $(document).on("click", "button#comment", addComment);
+
 
   // function for no post 
   function displayEmpty() {

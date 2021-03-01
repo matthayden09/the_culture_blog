@@ -29,39 +29,11 @@ module.exports = function (sequelize, DataTypes) {
 
   }
 
-
-
   return Post;
 };
 
 
 
-// module.exports = function(sequelize, DataTypes) {
-//     var Post = sequelize.define("Post", {
-//       body: {
-//           type: DataTypes.TEXT,
-//           allowNull: false,
-//           validate: {
-//               len: [1]
-//           }
-//         },
-//       author: {
-//         type: DataTypes.STRING,
-//         len: [1],
-//         allowNull: false,
-//       },
-
-//       category: {
-//           type: DataTypes.STRING,
-//           allowNull: false,
-//           len: [1]
-//       }
-//     });
-
-
-//     return Post;
-
-//   };
 
 
 
