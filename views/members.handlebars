@@ -3,35 +3,37 @@
   <div class="row">
     <div class="header">
       <h1 id="welcome">Welcome,&nbsp;<span class="member-name"></span></h1>
-
     </div>
 
   </div>
 
-  <div class="container">
+
+ 
+    {{!-- img --}}
+    <div class="row">
     <figure class="figure">
       <img src="https://miro.medium.com/max/950/1*_JR5_qc4efQmjPuSJ4fRBA.png" class="figure-img" alt="main image">
     </figure>
-
-    <div class="container">
+    </div>
+    {{!-- socket.io --}}
+    
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-2 ">
           <h3>Chat</h3>
 
           {{!-- socket.io message container --}}
-          <div id="message-container"></div>
+          <div id="message-container border"></div>
           <form id="send-container">
             <input type="text" id="message-input">
             <button type="submit" id="send-button">Send</button>
           </form>
 
         </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
+      
+    
+    {{!-- add new article  --}}
+      <div class=" new-article">
+        <div class="col-md-8">
           <h3>Add a new article</h3>
           <form id="cms">
             <div class="form-group">
@@ -51,16 +53,18 @@
                 </select>
               </div>
               <br />
-                <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
+              <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
 
             </div>
           </form>
         </div>
 
       </div>
-    </div>
+  </div>
 
-    <div  class="container">
+    {{!-- sections --}}
+   <div class="blogs">
+
       <div class="row">
         <div class="header">
           <h2 class="health">HEALTH</h2>
@@ -97,7 +101,9 @@
           <span id="tech-container"></span>
         </div>
       </div>
-    </div>
+   
+</div>
+ 
+</div>
 
-
-    <script type="text/javascript" src="js/members.js"></script>
+<script type="text/javascript" src="js/members.js"></script>
