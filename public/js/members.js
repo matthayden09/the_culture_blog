@@ -12,7 +12,7 @@ $(document).ready(() => {
   var author;
   var post;
   var name;
-  var commentInput;
+  var comment;
 
   $.get("/api/user_data", data => {
     // console.log(data)
@@ -134,6 +134,7 @@ $(document).ready(() => {
     postCard.append(postDate);
     postCard.append(postCardBody);
     postCardBody.append(likeBtn)
+    postCard.append(addComment)
     postCard.append(deleteBtn);
     postCard.append(editBtn);
     postCard.append(lineBreak)
@@ -154,32 +155,32 @@ $(document).ready(() => {
       likeBtn.text(likes + " likes");
 
     });
-
+    
     postCard.data("post", post);
     return postCard
   }
-
+  
   // function to add a comment
-  // function addComment() {
-  //   const commentHeading = $("<h4>Comments</h4>");
-  //   const comments = $("<div>");
-  //   commentHeading.addClass("comments-heading");
-  //   comments.addClass("comments-section");
-  //   postCardBody.append(commentHeading);
-  //   postCardBody.append(commentForm);
-  //   postCardBody.append(comments);
-  //   const commentForm = $(
-  //     `<form>
-  //       <input type=text placeholder="Enter comment here">
-  //       <button type="submit" id="comment" class="btn-info">Comment</button>
-  //       </form>`
-  //   );
-  //   const newComment = $(`<p>${name} commented: </p>`)
-  //   console.log(newComment)
-  //   comments.append(newComment)
-  // }
+  function addComment() {
+    const comments = $("<div>");
+    const commentHeading = $("<h4>Comments</h4>");
+    commentHeading.addClass("comments-heading");
+    comments.addClass("comments-section");
+    comments.append(commentHeading);
+    comments.append(commentForm);
+    
+    const commentForm = $(
+      `<form>
+        <input type=text placeholder="Enter comment here">
+        <button type="submit" id="comment" class="btn-info">Comment</button>
+        </form>`
+    );
+    
+    const newComment = $(`<p>${name} commented: </p>`)
+    comments.append(newComment)
+  };
 
-  // $(document).on("click", "button#comment", addComment);
+  $(document).on("click", "button#comment", addComment);
 
 
   // function for no post 
