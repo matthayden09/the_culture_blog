@@ -159,6 +159,11 @@ $(document).ready(() => {
     postCard.data("post", post);
     return postCard
   }
+
+  //retrieve comment by post ID from models 
+  function getComment() {
+    
+  }
   
   // function to add a comment
   function addComment() {
