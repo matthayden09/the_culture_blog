@@ -14,6 +14,33 @@ module.exports = function (app) {
     });
   });
 
+  app.get('/api/likes/', (req, res) => {
+    db.Likes.findAll({}) .then(function (dbPost) {
+      console.log(dbPost)
+      res.json(dbPost);
+    });
+    
+    // res.json({
+    //   likenum: re
+    // })
+  })
+
+  
+
+  app.post("/api/likes/", (req, res) => {
+    console.log(typeof req.body.likenum)
+    db.Likes.create({
+      likenum: req.body.likenum,      
+      postId: req.body.postId
+
+      
+      
+    });
+    // .then(() => {
+    //   res.status(200)
+    // })
+  })
+
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error

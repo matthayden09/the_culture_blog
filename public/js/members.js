@@ -19,6 +19,33 @@ $(document).ready(() => {
     author = data.id
   })
 
+  function getlikes(){
+  $.get('/api/likes', data => {
+    for (let i = 0; i < data.length; i++) {
+      const currentLike = data[i].likenum;
+
+      console.log(currentLike)
+      // if (currentLike == ) {
+      //   likeBtn.text(currentLike + 'likes')
+      //   likes = currentLike
+      // }
+      // if (currentLike == ) {
+
+      // } 
+      
+    }
+    // likes = data.likenum
+    // for (let i = 0; i < likes.length; i++) {
+    //   const like = likes[i];
+    //   if (likebtnId == likes[i]) {
+    //     likeBtn.text(likes + " likes");
+
+    //   }
+      
+    // }
+  })
+}
+
 
   $(document).on("click", "button.delete", postDelete)
 
@@ -29,12 +56,13 @@ $(document).ready(() => {
       string = "/category/" + string
     }
     $.get("/api/posts" + string, data => {
+      console.log(data)
       post = data
       if (!post) {
         displayEmpty();
       } else {
         initialize();
-       
+        // getComment(id)
       }
     })
   }
@@ -90,8 +118,10 @@ $(document).ready(() => {
 
       // blogContainer.append(postAdd);
     }
-
+    getLikes()
   }
+  let likebtnId = 0
+
 
   // render post card 
   function createPost(post) {
@@ -109,6 +139,7 @@ $(document).ready(() => {
     const deleteBtn = $("<button>");
     const editBtn = $("<button>");
     const lineBreak = $("<hr>")
+    likebtnId++
 
     // add class 
     postCard.addClass("card");
@@ -117,7 +148,7 @@ $(document).ready(() => {
     likeBtn.addClass("btn-primary")
     deleteBtn.addClass("delete btn btn-danger");
     editBtn.addClass("edit btn btn-secondary");
-
+    likeBtn.attr('id', likebtnId)
     // .text
     postTitle.text(post.title + "");
     postAuthor.text("Posted by: " + name + "");
@@ -151,10 +182,17 @@ $(document).ready(() => {
 
     // like button counter
     let likes = 0;
-    likeBtn.click(function () {
+    likeBtn.click(function (event) {
       likes++
       likeBtn.text(likes + " likes");
-
+      // console.log(event.target)
+      // console.log(likes)
+      $.post('/api/likes/', {
+        likenum: likes,
+        postId: event.target.id
+      }, function () {
+        console.log('success')
+      })
     });
     
     postCard.data("post", post);
@@ -166,7 +204,7 @@ $(document).ready(() => {
     $.get("/api/comments/" + id , data => {
       console.log(data)
       // console.log("post ", data)
-      post = data
+      comment = data
 
     })
     
@@ -216,7 +254,7 @@ $(document).ready(() => {
     var newPost = {
       title: titleInput.val().trim(),
       body: bodyInput.val().trim(),
-      category: postCategorySelect.val()
+      category: postCategorySelect.val(),
     };
 
     // console.log(newPost);
