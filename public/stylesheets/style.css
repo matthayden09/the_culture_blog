@@ -24,6 +24,18 @@ height: 100%;
     background-attachment: fixed;
 }
 
+.main-title {
+  font-family: 'Poiret One', cursive;
+  color:rgb(22, 28, 101);
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center;
+}
+
+.blog {
+  margin-bottom: 50px;
+}
+
 .figure-img {
   justify-content: center;
   padding: 10px;

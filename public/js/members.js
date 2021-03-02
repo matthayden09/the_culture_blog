@@ -171,7 +171,7 @@ $(document).ready(() => {
     postCardBody.append(comments);
     //Line break
     const lineBreak = $("<hr>");
-    postCardBody.append(lineBreak);
+    postCard.append(lineBreak);
     //Like button counter
     let likes = 0;
     likeBtn.click(function () {
