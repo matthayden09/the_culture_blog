@@ -52,7 +52,14 @@ module.exports = function (app) {
   });
 
   app.get("/api/posts/", function (req, res) {
-    db.Post.findAll({})
+    var query = {};
+    if (req.query.user_id) {
+      query.UserId = req.query.user_id;
+    }
+    db.Post.findAll({
+      where: query,
+      include: [db.User]
+    })
       .then(function (dbPost) {
         res.json(dbPost);
       });
@@ -75,7 +82,7 @@ module.exports = function (app) {
       title: req.body.title,
       body: req.body.body,
       category: req.body.category,
-      UserId: req.user.id
+      UserId: req.user.id,
     })
       .then(function (dbPost) {
         res.json(dbPost);

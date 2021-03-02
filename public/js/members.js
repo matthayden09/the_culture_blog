@@ -107,7 +107,8 @@ $(document).ready(() => {
   //Create post card
   function createPost(post) {
     const postCard = $("<div>")
-      .addClass("card");
+      .addClass("card")
+      .attr("author", post.UserId)
 
     const postCardHeading = $("<div>")
       .addClass("card-header");
@@ -136,7 +137,8 @@ $(document).ready(() => {
     const postBody = $("<p>");
     postTitle.text(post.title + "");
     const postAuthor = $("<p style='font-weight: bold'>");
-    postAuthor.text("Posted by: " + name + "");
+    postAuthor.text("Posted by: " + post.User.email + "");
+    console.log(post.User.email)
     postBody.text(post.body);
     const formatDate = new Date(post.createdAt).toLocaleDateString();
     postDate.text(formatDate);
