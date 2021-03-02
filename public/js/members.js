@@ -10,6 +10,7 @@ $(document).ready(() => {
   var techContainer = $('#tech-container');
   var musicContainer = $('#music-container');
   var author;
+  var name;
   var post;
   var blogId;
   var update = false;
@@ -134,10 +135,13 @@ $(document).ready(() => {
     //Body
     const postBody = $("<p>");
     postTitle.text(post.title + "");
+    const postAuthor = $("<p style='font-weight: bold'>");
+    postAuthor.text("Posted by: " + name + "");
     postBody.text(post.body);
     const formatDate = new Date(post.createdAt).toLocaleDateString();
     postDate.text(formatDate);
     postCardHeading.append(postTitle);
+    postCardHeading.append(postAuthor);
     postCardBody.append(postBody);
 
     postCard.append(postCardHeading);
@@ -250,7 +254,7 @@ $(document).ready(() => {
   //Socket.io and client email info
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
-    var name = data.email;
+    name = data.email;
 
     // chat 
     const socket = io.connect("https://gentle-cliffs-54160.herokuapp.com/");
